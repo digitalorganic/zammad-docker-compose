@@ -63,10 +63,14 @@ services:
       - zammad-data:/opt/zammad
 
   zammad-postgresql:
+    build:
+      context: .
+      dockerfile: ./containers/zammad-postgresql/Dockerfile
+    image: zammad-docker-compose:zammad-postgresql-${VERSION}
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASS}
-    image: ${IMAGE_REPO}:zammad-postgresql${VERSION}
+    # image: ${IMAGE_REPO}:zammad-postgresql${VERSION}
     restart: ${RESTART}
     volumes:
       - postgresql-data:/var/lib/postgresql/data
